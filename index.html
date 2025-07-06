@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyWithShuaib Utilities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --success: #4cc9f0;
+            --dark: #3a0ca3;
+            --light: #f8f9fa;
+            --text: #212529;
+            --gray: #6c757d;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border-radius: 50px;
+            border: 2px solid #e1e5eb;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(72, 149, 239, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 25px 25px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .card-body p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .card-footer {
+            padding: 0 25px 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .url-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .url-link:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(108, 117, 125, 0.1);
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: translateY(-20px);
+            transition: all 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(72, 149, 239, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .card-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .url-link {
+                justify-content: center;
+            }
+            
+            .card-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <h1>StudyWithShuaib Utilities</h1>
+            </div>
+            <p class="subtitle">Your all-in-one toolbox for productivity. Add, edit, and manage your favorite utilities in one place.</p>
+            
+            <div class="controls">
+                <button class="btn btn-primary" id="addToolBtn">
+                    <i class="fas fa-plus"></i> Add New Tool
+                </button>
+                <button class="btn btn-outline" id="filterBtn">
+                    <i class="fas fa-filter"></i> Filter Tools
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search tools...">
+            </div>
+        </header>
+        
+        <main>
+            <div class="tools-grid" id="toolsContainer">
+                <!-- Tools will be dynamically added here -->
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>© 2023 StudyWithShuaib Utilities | Made with ❤️ for productivity enthusiasts</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for Add/Edit Tool -->
+    <div class="modal" id="toolModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Tool</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="toolForm">
+                    <input type="hidden" id="toolId">
+                    <div class="form-group">
+                        <label for="toolName">Tool Name</label>
+                        <input type="text" class="form-control" id="toolName" placeholder="Enter tool name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="toolUrl">Website URL</label>
+                        <input type="url" class="form-control" id="toolUrl" placeholder="https://example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="toolDescription">Description</label>
+                        <textarea class="form-control" id="toolDescription" placeholder="Describe what this tool does..." required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveToolBtn">Save Tool</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for tools
+        let data = [
+            {
+                id: 1,
+                name: "Picser",
+                url: "https://picser.vercel.app/",
+                description: "Free Hosting Server for your Images"
+            },
+            {
+                id: 2,
+                name: "SdUrlShortner",
+                url: "https://sdshortner.vercel.app/",
+                description: "Short Url Using is.gd api"
+            },
+            {
+                id: 3,
+                name: "Html to Txt",
+                url: "https://html-to-txt.vercel.app/",
+                description: "Convert CW Html To Text"
+            },
+            {
+                id: 4,
+                name: "Link Organizer ",
+                url: "https://link-organizer-hazel.vercel.app/",
+                description: "Organize Links for StudyWithShuaib"
+            },
+            {
+                id: 5,
+                name: "SdLink",
+                url: "https://sdlink.vercel.app/",
+                description: "My Personal Url Shortner"
+            },
+            {
+                id: 6,
+                name: "Mock Extractor",
+                url: "https://mockextractor.vercel.app/",
+                description: "Extract mock test data from html"
+            }
+        ];
+
+        // DOM Elements
+        const toolsContainer = document.getElementById('toolsContainer');
+        const toolModal = document.getElementById('toolModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const toolForm = document.getElementById('toolForm');
+        const toolIdInput = document.getElementById('toolId');
+        const toolNameInput = document.getElementById('toolName');
+        const toolUrlInput = document.getElementById('toolUrl');
+        const toolDescInput = document.getElementById('toolDescription');
+        const addToolBtn = document.getElementById('addToolBtn');
+        const closeModalBtn = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const saveToolBtn = document.getElementById('saveToolBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        // Current editing tool
+        let currentEditId = null;
+
+        // Render tools
+        function renderTools(tools = data) {
+            toolsContainer.innerHTML = '';
+            
+            if (tools.length === 0) {
+                toolsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; color: #6c757d;"></i>
+                        <h3>No tools found</h3>
+                        <p>Try adjusting your search or add a new tool</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            tools.forEach(tool => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.innerHTML = `
+                    <div class="card-header">
+                        <h3>${tool.name}</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>${tool.description}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="${tool.url}" target="_blank" class="url-link">
+                            <i class="fas fa-external-link-alt"></i> Visit Website
+                        </a>
+                        <div class="card-actions">
+                            <button class="action-btn edit-btn" data-id="${tool.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" data-id="${tool.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                toolsContainer.appendChild(toolCard);
+            });
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', () => editTool(btn.dataset.id));
+            });
+            
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => deleteTool(btn.dataset.id));
+            });
+        }
+
+        // Open modal for adding new tool
+        function openAddModal() {
+            modalTitle.textContent = 'Add New Tool';
+            toolForm.reset();
+            toolIdInput.value = '';
+            currentEditId = null;
+            toolModal.classList.add('active');
+        }
+
+        // Open modal for editing tool
+        function editTool(id) {
+            const tool = data.find(t => t.id == id);
+            if (tool) {
+                modalTitle.textContent = 'Edit Tool';
+                toolIdInput.value = tool.id;
+                toolNameInput.value = tool.name;
+                toolUrlInput.value = tool.url;
+                toolDescInput.value = tool.description;
+                currentEditId = id;
+                toolModal.classList.add('active');
+            }
+        }
+
+        // Delete tool
+        function deleteTool(id) {
+            if (confirm('Are you sure you want to delete this tool?')) {
+                data = data.filter(tool => tool.id != id);
+                renderTools();
+            }
+        }
+
+        // Save tool (add or update)
+        function saveTool() {
+            const name = toolNameInput.value.trim();
+            const url = toolUrlInput.value.trim();
+            const description = toolDescInput.value.trim();
+            
+            if (!name || !url || !description) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (currentEditId) {
+                // Update existing tool
+                const index = data.findIndex(tool => tool.id == currentEditId);
+                if (index !== -1) {
+                    data[index] = {
+                        ...data[index],
+                        name,
+                        url,
+                        description
+                    };
+                }
+            } else {
+                // Add new tool
+                const newId = data.length > 0 ? Math.max(...data.map(tool => tool.id)) + 1 : 1;
+                data.push({
+                    id: newId,
+                    name,
+                    url,
+                    description
+                });
+            }
+            
+            renderTools();
+            closeModal();
+        }
+
+        // Close modal
+        function closeModal() {
+            toolModal.classList.remove('active');
+        }
+
+        // Search tools
+        function searchTools() {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (!searchTerm) {
+                renderTools();
+                return;
+            }
+            
+            const filteredTools = data.filter(tool => 
+                tool.name.toLowerCase().includes(searchTerm) || 
+                tool.description.toLowerCase().includes(searchTerm)
+            );
+            
+            renderTools(filteredTools);
+        }
+
+        // Event Listeners
+        addToolBtn.addEventListener('click', openAddModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        saveToolBtn.addEventListener('click', saveTool);
+        searchInput.addEventListener('input', searchTools);
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === toolModal) {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        renderTools();
+    </script>
+</body>
+</html>
